@@ -1,0 +1,6 @@
+{
+  "allow-net": true,
+  "tasks": {
+    "dev": "deno run --watch main.ts"
+  }
+}
