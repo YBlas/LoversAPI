@@ -4,6 +4,10 @@
 
 - Returns a list of all lovers in the database.
 
+### GET `/hobbies`
+
+- Returns a list of all hobbies in the database.
+
 ### GET `/:name`
 
 - Returns lover matching the provided name.

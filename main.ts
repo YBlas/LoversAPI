@@ -27,30 +27,6 @@ const connectMongoDB = async (): Promise<Database> => {
 const db = await connectMongoDB();
 const lovers = db.collection("lovers");
 
-enum Hobbies {
-  RECORD_COLLECTOR = "Record Collector",
-  FILM_PHOTOGRAPHY = "Film Photography",
-  BOOK_READER = "Book Reader",
-  GARDENER = "Gardener",
-  COOK = "Cook",
-  TRAVELER = "Traveler",
-  MUSICIAN = "Musician",
-  ARTIST = "Artist",
-  WRITER = "Writer",
-  COMIC_BOOK_COLLECTOR = "Comic Book Collector",
-  VINTAGE_FASHION = "Vintage Fashion",
-  ANIMAL_LOVER = "Animal Lover",
-  SPORTS_FAN = "Sports Fan",
-  MOVIE_BUFF = "Movie Buff",
-  FOODIE = "Foodie",
-  CRAFTSMAN = "Craftsman",
-  VIDEO_GAMES = "Video Games",
-  COLLECTOR = "Collector",
-  FITNESS = "Fitness",
-  DANCER = "Dancer",
-  HI_FI = "Hi-Fi",
-}
-
 type comment = {
   user: string;
   message: string;
@@ -62,7 +38,7 @@ type Lover = {
   age: number;
   sex: string;
   description: string;
-  hobbies: Hobbies[];
+  hobbies: string[];
   photo: string;
   comments: comment[];
 };
@@ -83,6 +59,11 @@ app.get("/", (req: Request, res: Response): void => {
       });
       res.json(filteredE);
     });
+});
+
+app.get("/hobbies", async (req: Request, res: Response) => {
+  const allHobbies = await lovers.distinct("hobbies");
+  res.json(allHobbies);
 });
 
 app.post("/", async (req: Request, res: Response) => {
