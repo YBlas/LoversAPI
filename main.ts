@@ -61,6 +61,20 @@ app.get("/", (req: Request, res: Response): void => {
     });
 });
 
+app.post("/login", async (req: Request, res: Response) => {
+  const { name, password } = req.body;
+  const existingLover = await lovers.findOne({ name });
+  if (existingLover) {
+    if (existingLover.password === password) {
+      res.json({ message: "Login successful" });
+    } else {
+      res.status(401).json({ error: "Unauthorized" });
+    }
+  } else {
+    res.status(404).json({ error: "Lover not found" });
+  }
+});
+
 app.get("/hobbies", async (req: Request, res: Response) => {
   const allHobbies = await lovers.distinct("hobbies");
   res.json(allHobbies);

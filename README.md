@@ -24,6 +24,10 @@
 - Requires the `name` field in the request parameters.
 - Requires updated lover details in the request body.
 
+### POST `/login`
+
+- Name and password on body for authentication.
+
 ### DELETE `/:name`
 
 - Deletes a lover from the database.
